@@ -1,4 +1,3 @@
-# Google-News-Scraping-Sentiment-Analysis-
 # Google News Scraper with Sentiment Analysis
 
 A Python project that automatically fetches Google News articles for a keyword, extracts the full content, and performs sentiment analysis (positive, negative, neutral) on the news.
