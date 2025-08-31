@@ -1,43 +1,40 @@
-# Google News Scraper with Sentiment Analysis
+# 📰 Google News Scraper + RAG Engine
 
-A Python project that automatically fetches Google News articles for a keyword, extracts the full content, and performs sentiment analysis (positive, negative, neutral) on the news.
+This project scrapes **Google News articles**, extracts **real article content**, performs **sentiment analysis**, and enables **semantic search** & **RAG (Retrieval-Augmented Generation)** responses using **T5 transformers**.
 
-## Features
+---
 
-- Fetches latest news articles from Google News RSS.  
-- Resolves Google News redirect links to get the real article URL.  
-- Extracts full article content using Newspaper3k.  
-- Performs sentiment analysis using NLTK VADER.  
-- Saves results in JSON format for easy analysis.  
-- Can fetch multiple articles in parallel for speed.
+## ✨ Features
+- Scrape **Google News RSS feeds** with real article content extraction.  
+- Multi-fallback scraping using **newspaper3k**, **trafilatura**, and **BeautifulSoup**.  
+- Perform **sentiment analysis** with NLTK VADER.  
+- Create and search **vector embeddings** with SentenceTransformers + FAISS.  
+- Generate **RAG-based answers** with T5-small.  
+- Save results in **JSON** or **CSV** format.  
+- Track **success rate** of article extraction.  
+- Supports **parallel workers** for faster scraping.  
+- Stores vectors and metadata in **FAISS + JSON** for reusability.  
 
-## Requirements
+---
 
-- Python 3.8+  
-- Libraries: `requests`, `beautifulsoup4`, `newspaper3k`, `feedparser`, `nltk`  
-- NLTK data for sentiment analysis (`vader_lexicon` and `punkt`) are automatically downloaded in the code using:
+## ⚙️ Arguments
+| Argument        | Description |
+|-----------------|-------------|
+| `--q`           | Search query for scraping news |
+| `--search`      | Search query in existing vector DB |
+| `--rag-query`   | Question for RAG answer generation |
+| `--hl`          | Language (default: `en-US`) |
+| `--gl`          | Country (default: `US`) |
+| `--max`         | Max results to fetch (default: `10`) |
+| `--workers`     | Number of parallel workers (default: `3`) |
+| `--output`      | Output file (default: `output.json`) |
+| `--format`      | Output format (`json` or `csv`) |
+| `--vector-db`   | Path to vector DB (default: `news_vectors`) |
 
-```python
-import nltk
-nltk.download('vader_lexicon', quiet=True)
-nltk.download('punkt', quiet=True)
-```
-### How to Run
+---
 
-Run the script from the command line:
+## 🖥️ Example Usage
 
-python scrape_news.py --q "Artificial Intelligence" --hl en-US --gl US --max 10 --workers 3 --output output.json
-
-Arguments
-
---q : Search query (required)
-
---hl : Language (default: en-US)
-
---gl : Country (default: US)
-
---max : Maximum number of news articles to fetch (default: 10)
-
---workers : Number of parallel threads (default: 3)
-
---output : Output JSON file name (default: output.json)
+### 1. Scrape Google News and save results
+```bash
+python Hackathon.py --q "artificial intelligence" --hl en-US --gl US --max 15 --workers 5 --output results.json --format json --vector-db ai_news_vectors
